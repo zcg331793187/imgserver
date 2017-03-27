@@ -7,7 +7,7 @@
 "use strict";
 let express = require('express');
 let router = express.Router();
-const mysqlBase_1 = require('../dbBase/mysqlBase');
+const mysqlBase_1 = require('../js/dbBase/mysqlBase');
 let mysql = new mysqlBase_1.mysqlBase();
 router.get('/', function (req, res, next) {
     let limit = Number(req.params.limit) || 0;
