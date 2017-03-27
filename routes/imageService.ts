@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 
 
 
-    res.json(mysql.select('select id from node_title as t   ORDER BY  t.id desc  limit ?,18', [limit]));
+    res.json(mysql.select('select id from node_title as t where t.status=1  ORDER BY  t.id desc  limit ?,18', [limit]));
 
 
 
@@ -83,7 +83,7 @@ router.get('/databaseSelect/limit/:limit', function(req, res, next) {
     let limit = Number(req.params.limit)||0;
 
 
-    mysql.select('select t.imgThums,t.title,t.id from node_title as t   ORDER BY  t.id desc  limit ?,18', [limit]).spread((response: any) => {
+    mysql.select('select t.imgThums,t.title,t.id from node_title as t where   t.status=1   ORDER BY  t.id desc  limit ?,18', [limit]).spread((response: any) => {
 
 
 
@@ -104,7 +104,7 @@ router.get('/databaseSelect/', function(req, res, next) {
     // res.send(req.params.limit);
 
 
-    mysql.select('select imgThums,title,id from node_title   ORDER BY id DESC limit ?,18', [0]).spread((response: any) => {
+    mysql.select('select imgThums,title,id from node_title where status=1     ORDER BY id DESC limit ?,18', [0]).spread((response: any) => {
 
 
 
@@ -144,7 +144,7 @@ router.get('/imgDetail/title/:title', function(req, res, next) {
 
 router.get('/imgSearch/title/:title', function(req, res, next) {
 
-    mysql.select("select imgThums,title,id from node_title  where  `title` like '%"+req.params.title+"%'", []).spread((response: any) => {
+    mysql.select("select imgThums,title,id from node_title  where       status=1 and   `title` like '%"+req.params.title+"%'", []).spread((response: any) => {
 
 
 
@@ -161,7 +161,7 @@ router.get('/imgSearch/title/:title', function(req, res, next) {
 router.get('/imgTotal/', function(req, res, next) {
 
 
-    mysql.select("select count(*) as count from node_title ", []).spread((response: any) => {
+    mysql.select("select count(*) as count from node_title where status=1 ", []).spread((response: any) => {
 
 
 
