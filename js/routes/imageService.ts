@@ -7,7 +7,7 @@
 
 let express = require('express');
 let router = express.Router();
-import {mysqlBase} from '../dbBase/mysqlBase';
+import {mysqlBase} from '../js/dbBase/mysqlBase';
 
 let mysql  =new mysqlBase();
 
