@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-const routeConfigs_1 = require('./Configs/routeConfigs');
+const routeConfigs_1 = require('./configs/routeConfigs');
 class Router {
     constructor(koaRoute) {
         routeConfigs_1.config.map(route => {

@@ -4,8 +4,7 @@
 
 
 
-import baseKeyWord from '../Router/baseKeyWord';
-import imageService from '../Router/imageService';
+import imageService from '../router/imageService';
 interface IRouteConfigs {
 
     method: string
@@ -32,5 +31,20 @@ export const config:IRouteConfigs[] =    [
         method:Methods[Methods.get],
         url:'/imgTitles/:limit',
         fn: imageService.getInstance().getimgTitles
+    },
+    {
+        method:Methods[Methods.get],
+        url:'/imgProxy/id/:id',
+        fn: imageService.getInstance().getImgBuffer
+    },
+    {
+        method:Methods[Methods.get],
+        url:'/imgProxy/titleId/:titleId',
+        fn: imageService.getInstance().getImgBuffer
+    },
+    {
+        method:Methods[Methods.get],
+        url:'/imgtotal',
+        fn: imageService.getInstance().getCount
     }
 ];

@@ -2,7 +2,7 @@
  * Created by zhoucaiguang on 2017/3/24.
  */
 
-import {config} from './Configs/routeConfigs';
+import {config} from './configs/routeConfigs';
 export  default class Router {
 
 

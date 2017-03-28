@@ -35,3 +35,18 @@ function getTitleDbFindOne(where) {
     });
 }
 exports.getTitleDbFindOne = getTitleDbFindOne;
+function getTitleDbCount() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield db.TitleDb.count();
+    });
+}
+exports.getTitleDbCount = getTitleDbCount;
+function handelReferer(url) {
+    if (url.indexOf('girlatlas') > -1) {
+        return 'http://girlatlas.b0.upaiyun.com/';
+    }
+    else {
+        return null;
+    }
+}
+exports.handelReferer = handelReferer;

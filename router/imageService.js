@@ -10,7 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * Created by zhoucaiguang on 2017/3/27.
  */
-const imageServiceModel = require('../Model/imageServiceModel');
+const imageServiceModel = require('../model/imageServiceModel');
+const reqModel_1 = require('../model/reqModel');
 class imageService {
     static getInstance() {
         if (!imageService.instance) {
@@ -30,10 +31,47 @@ class imageService {
                 where: {
                     status: 1,
                 },
-                attributes: ['id', 'title', 'imgThums'],
-                'limit': 18, offset: limit
+                attributes: ['id', 'title'],
+                'limit': 18, offset: limit,
+                order: 'id desc'
             };
             ctx.body = yield imageServiceModel.getTitleDbFindAll(where);
+        });
+    }
+    getCount(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let count = yield imageServiceModel.getTitleDbCount();
+            ctx.body = { count };
+        });
+    }
+    getImgBuffer(ctx, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //    img-proxy
+            let arg = ctx.params;
+            let titleId = arg.titleId;
+            let id = arg.id;
+            let whereId;
+            if (titleId) {
+                whereId = { titleId };
+            }
+            else if (id) {
+                whereId = { id };
+            }
+            let whereOne = {
+                where: whereId,
+                'limit': 1, offset: 0,
+                attributes: ['url']
+            };
+            let imgPath = yield imageServiceModel.getImgDbFindOne(whereOne);
+            let resUrl = imageServiceModel.handelReferer(imgPath.url);
+            let option = { headers: {}, iSEncoding: true, resolveWithFullResponse: true };
+            if (resUrl) {
+                option.headers['Referer'] = 'http://girl-atlas.net/';
+            }
+            let imgBuffer = yield reqModel_1.httpGet(imgPath.url, {}, option);
+            ctx.set('Content-Type', imgBuffer.headers['content-type']);
+            ctx.set('Cache-Control', 'max-age=259200');
+            ctx.body = imgBuffer.body;
         });
     }
     getSearchTitle(ctx, next) {
@@ -44,9 +82,9 @@ class imageService {
                 where = {
                     where: {
                         status: 1,
-                        title: arg.title,
+                        title: { like: '%' + arg.title + '%' },
                     },
-                    attributes: ['id', 'title', 'imgThums']
+                    attributes: ['id', 'title']
                 };
                 ctx.body = yield imageServiceModel.getTitleDbFindAll(where);
             }
@@ -61,7 +99,7 @@ class imageService {
                     where: {
                         titleId: arg.titleId,
                     },
-                    attributes: ['url', 'titleId']
+                    attributes: ['id', 'titleId']
                 };
                 whereOne = {
                     where: {
