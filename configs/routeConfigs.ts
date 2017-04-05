@@ -20,31 +20,31 @@ export const config:IRouteConfigs[] =    [
     {
         method:Methods[Methods.get],
         url:'/imgDetail/:titleId',
-        fn: imageService.getInstance().getTitleIdImg
+        fn: imageService.getTitleIdImg
     },
     {
         method:Methods[Methods.get],
         url:'/imgSearch/:title',
-        fn: imageService.getInstance().getSearchTitle
+        fn: imageService.getSearchTitle
     },
     {
         method:Methods[Methods.get],
         url:'/imgTitles/:limit',
-        fn: imageService.getInstance().getimgTitles
+        fn: imageService.getimgTitles
     },
     {
         method:Methods[Methods.get],
         url:'/imgProxy/id/:id',
-        fn: imageService.getInstance().getImgBuffer
+        fn: imageService.getImgBuffer
     },
     {
         method:Methods[Methods.get],
         url:'/imgProxy/titleId/:titleId',
-        fn: imageService.getInstance().getImgBuffer
+        fn: imageService.getImgBuffer
     },
     {
         method:Methods[Methods.get],
         url:'/imgtotal',
-        fn: imageService.getInstance().getCount
+        fn: imageService.getCount
     }
 ];

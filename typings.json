@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "bluebird": "registry:dt/bluebird#3.5.0+20170323165310",
+    "gm": "registry:dt/gm#1.17.0+20170220173005",
     "koa": "registry:dt/koa#2.0.0+20170311193110",
     "koa-bodyparser": "registry:dt/koa-bodyparser#3.0.0+20170120190901",
     "koa-logger": "registry:dt/koa-logger#2.0.0+20161219223325",

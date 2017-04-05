@@ -12,6 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  */
 const imageServiceModel = require('../model/imageServiceModel');
 const reqModel_1 = require('../model/reqModel');
+// const images = require("images");
 class imageService {
     static getInstance() {
         if (!imageService.instance) {
@@ -19,7 +20,7 @@ class imageService {
         }
         return imageService.instance;
     }
-    getimgTitles(ctx, next) {
+    static getimgTitles(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             let arg = ctx.params;
             let limit = Number(arg.limit);
@@ -38,13 +39,13 @@ class imageService {
             ctx.body = yield imageServiceModel.getTitleDbFindAll(where);
         });
     }
-    getCount(ctx, next) {
+    static getCount(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             let count = yield imageServiceModel.getTitleDbCount();
             ctx.body = { count };
         });
     }
-    getImgBuffer(ctx, next) {
+    static getImgBuffer(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             //    img-proxy
             let arg = ctx.params;
@@ -69,12 +70,15 @@ class imageService {
                 option.headers['Referer'] = 'http://girl-atlas.net/';
             }
             let imgBuffer = yield reqModel_1.httpGet(imgPath.url, {}, option);
+            let buffer = imgBuffer.body;
+            if (titleId) {
+            }
             ctx.set('Content-Type', imgBuffer.headers['content-type']);
             ctx.set('Cache-Control', 'max-age=259200');
-            ctx.body = imgBuffer.body;
+            ctx.body = buffer;
         });
     }
-    getSearchTitle(ctx, next) {
+    static getSearchTitle(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             let arg = ctx.params;
             let where;
@@ -90,7 +94,7 @@ class imageService {
             }
         });
     }
-    getTitleIdImg(ctx, next) {
+    static getTitleIdImg(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             let arg = ctx.params;
             let whereAll, whereOne;

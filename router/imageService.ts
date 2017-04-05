@@ -3,6 +3,7 @@
  */
 import * as imageServiceModel from '../model/imageServiceModel';
 import {httpGet} from '../model/reqModel';
+// const images = require("images");
 
 
 export default class imageService{
@@ -19,7 +20,7 @@ export default class imageService{
     }
 
 
-    public async getimgTitles(ctx,next){
+    public static async getimgTitles(ctx,next){
         let arg = ctx.params;
         let limit = Number(arg.limit);
         let where;
@@ -43,7 +44,7 @@ export default class imageService{
 
 
 
-    public async getCount(ctx,next){
+    public static async getCount(ctx,next){
 
 
 
@@ -54,7 +55,7 @@ export default class imageService{
     }
 
 
-    public async getImgBuffer(ctx,next){
+    public static async getImgBuffer(ctx,next){
 
     //    img-proxy
         let arg = ctx.params;
@@ -89,16 +90,20 @@ export default class imageService{
 
 
         let imgBuffer =    await httpGet(imgPath.url,{},option);
+        let buffer = imgBuffer.body;
+        if(titleId){
+             // buffer = images(imgBuffer.body).resize(400).encode('jpg', {operation:50});
 
+        }
 
         ctx.set('Content-Type',imgBuffer.headers['content-type']);
         ctx.set('Cache-Control','max-age=259200');
-        ctx.body = imgBuffer.body;
+        ctx.body = buffer;
 
     }
 
 
-    public async getSearchTitle(ctx,next){
+    public static async getSearchTitle(ctx,next){
         let arg = ctx.params;
         let where;
         if(arg.title){
@@ -119,7 +124,7 @@ export default class imageService{
     }
 
 
-    public async getTitleIdImg(ctx,next){
+    public static async getTitleIdImg(ctx,next){
         let arg = ctx.params;
         let whereAll,whereOne;
         if(arg.titleId){
@@ -141,6 +146,10 @@ export default class imageService{
             ctx.body =  {list, title};
         }
     }
+
+
+
+
 
 
 

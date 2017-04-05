@@ -33,6 +33,6 @@ koaRoute.use((ctx, next) => __awaiter(this, void 0, void 0, function* () {
 }));
 new route_1.default(koaRoute);
 app.listen(3003);
-app.listen(3004);
-app.listen(3005);
-console.log('服务开启，端口号:3003,3004,3005');
+// app.listen(3004);
+// app.listen(3005);
+console.log('服务开启，端口号:3003');

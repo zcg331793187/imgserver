@@ -12,31 +12,31 @@ exports.config = [
     {
         method: Methods[Methods.get],
         url: '/imgDetail/:titleId',
-        fn: imageService_1.default.getInstance().getTitleIdImg
+        fn: imageService_1.default.getTitleIdImg
     },
     {
         method: Methods[Methods.get],
         url: '/imgSearch/:title',
-        fn: imageService_1.default.getInstance().getSearchTitle
+        fn: imageService_1.default.getSearchTitle
     },
     {
         method: Methods[Methods.get],
         url: '/imgTitles/:limit',
-        fn: imageService_1.default.getInstance().getimgTitles
+        fn: imageService_1.default.getimgTitles
     },
     {
         method: Methods[Methods.get],
         url: '/imgProxy/id/:id',
-        fn: imageService_1.default.getInstance().getImgBuffer
+        fn: imageService_1.default.getImgBuffer
     },
     {
         method: Methods[Methods.get],
         url: '/imgProxy/titleId/:titleId',
-        fn: imageService_1.default.getInstance().getImgBuffer
+        fn: imageService_1.default.getImgBuffer
     },
     {
         method: Methods[Methods.get],
         url: '/imgtotal',
-        fn: imageService_1.default.getInstance().getCount
+        fn: imageService_1.default.getCount
     }
 ];

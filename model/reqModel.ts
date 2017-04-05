@@ -20,6 +20,14 @@ export interface IRequestOption{
     resolveWithFullResponse?:boolean
 }
 
+export interface IConfigs{
+    iSgb2312?:boolean,
+    iSEncoding?:boolean,
+    iSGzip?:boolean,
+    resolveWithFullResponse?:boolean
+    headers?:Object,
+}
+
 
 
 export enum MethodEnum{
@@ -27,7 +35,7 @@ export enum MethodEnum{
 }
 
 
-function  processOptions(method:MethodEnum,option:IRequestOption,data:Object,config:IRequestOption){
+function  processOptions(method:MethodEnum,option:IRequestOption,data:Object,config:IConfigs){
 
 
 
@@ -72,7 +80,7 @@ function  processOptions(method:MethodEnum,option:IRequestOption,data:Object,con
 
 
 
-function req(uri:string,data:Object,method:MethodEnum,config:IRequestOption):Promise<Object>{
+function req(uri:string,data:Object,method:MethodEnum,config:IConfigs):Promise<Object>{
     var options:IRequestOption = <IRequestOption>{
         uri:uri,
     };
@@ -102,7 +110,7 @@ function req(uri:string,data:Object,method:MethodEnum,config:IRequestOption):Pro
 }
 
 
-export function httpGet(uri:string,data:Object={},config):Promise<any>{
+export function httpGet(uri:string,data:Object={},config:IConfigs):Promise<any>{
 
 
     return req(uri,data,MethodEnum.GET,config);
@@ -111,7 +119,7 @@ export function httpGet(uri:string,data:Object={},config):Promise<any>{
 }
 
 
-export function httpPost(uri:string,data:Object={},config):Promise<Object>{
+export function httpPost(uri:string,data:Object={},config:IConfigs):Promise<Object>{
 
     return req(uri,data,MethodEnum.POST,config);
 
